@@ -1,0 +1,21 @@
+{
+  "name": "babybook",
+  "version": "1.0.0",
+  "private": true,
+  "description": "宝宝簿 · 自托管的产检 / 出生 / 疫苗 / 成长记录",
+  "main": "server/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "check": "node --check server/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.22.3",
+    "mysql2": "^3.24.6"
+  }
+}

@@ -1,0 +1,25 @@
+# 宝宝簿 BabyBook —— 与你的 mysql-docker 同款用法
+#   cp .env.example .env && vi .env
+#   docker compose up -d --build
+# 然后浏览器打开 http://<这台机器的IP>:8090
+name: babybook
+
+services:
+  babybook:
+    build: .
+    container_name: babybook
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8090}:${PORT:-8090}"
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT:-3306}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      ADMIN_USER: ${ADMIN_USER:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      TZ: Asia/Shanghai
+    volumes:
+      # 头像等上传文件落在宿主机，容器重建不丢
+      - ./data/uploads:/app/data/uploads
