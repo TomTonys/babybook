@@ -88,10 +88,14 @@ function formatAge(birth, ref = todayStr()) {
   return parts.join(' ');
 }
 
-/** 由预产期推算某天的孕龄（天）。足月按 280 天计 */
+/**
+ * 由预产期推算某天的孕龄（天）。足月按 280 天计。
+ * 孕龄 = 280 −（该天距预产期还剩几天）。未到预产期时该天在前的天数为正、正常递减；
+ * 过了预产期则该值为负，孕龄相应 >280（过期产）。
+ */
 function gestDays(dueDate, date) {
   if (!dueDate || !isDate(dueDate)) return null;
-  return 280 - diffDays(date, dueDate);
+  return 280 - diffDays(dueDate, date);
 }
 
 function gestLabel(days) {
